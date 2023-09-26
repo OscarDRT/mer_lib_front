@@ -5,11 +5,6 @@ import React, { Fragment } from "react";
 import styles from "./id.module.scss";
 import { Metadata } from "next";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-
-const DynamicCategories = dynamic(() => import("@/components/categories"), {
-  ssr: false,
-});
 
 type Props = {
   params: { id: string };
@@ -83,15 +78,14 @@ export default async function ItemId({ params }: { params: { id: string } }) {
   const amountFor = amountFormat(amount, currency);
 
   const descriptionHtml = description?.split("\n").map((line, index, array) => (
-    <>
+    <Fragment key={index}>
       {line}
       {index === array.length - 1 ? null : <br />}
-    </>
+    </Fragment>
   ));
 
   return (
     <Fragment>
-      <DynamicCategories />
       <section className={styles.section}>
         <div className={styles.flexContainer}>
           <div className={styles.imageContainer}>
