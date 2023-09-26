@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const path = require("path");
 
-module.exports = nextConfig
+const nextConfig = {
+  images: {
+    domains: ["http2.mlstatic.com"],
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+};
+
+module.exports = nextConfig;
