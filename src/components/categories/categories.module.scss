@@ -1,0 +1,7 @@
+@use "../../variables.module.scss" as variables;
+
+.categories {
+  margin-bottom: variables.$spacing-regular;
+  font-size: variables.$font-size-sm;
+  color: variables.$color-light-grey;
+}

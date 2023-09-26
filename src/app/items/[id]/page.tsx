@@ -1,10 +1,15 @@
 import { ItemResult } from "@/@types/item";
 import { amountFormat } from "@/utils/commons";
 import Image from "next/image";
-import React from "react";
+import React, { Fragment } from "react";
 import styles from "./id.module.scss";
 import { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const DynamicCategories = dynamic(() => import("@/components/categories"), {
+  ssr: false,
+});
 
 type Props = {
   params: { id: string };
@@ -85,40 +90,43 @@ export default async function ItemId({ params }: { params: { id: string } }) {
   ));
 
   return (
-    <section className={styles.section}>
-      <div className={styles.flexContainer}>
-        <div className={styles.imageContainer}>
-          <Image
-            alt={title}
-            src={picture}
-            fill
-            sizes="100vw"
-            style={{
-              objectFit: "contain",
-            }}
-          />
-        </div>
+    <Fragment>
+      <DynamicCategories />
+      <section className={styles.section}>
+        <div className={styles.flexContainer}>
+          <div className={styles.imageContainer}>
+            <Image
+              alt={title}
+              src={picture}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
 
-        <div className={styles.infoContainer}>
-          <div className={styles.infoContent}>
-            <p className={styles.condition}>
-              {condition.charAt(0).toUpperCase() +
-                condition.slice(1).toLowerCase()}
-            </p>
-            <h1>{title}</h1>
-            <p className={styles.price}>{amountFor}</p>
-            <button>Comprar</button>
+          <div className={styles.infoContainer}>
+            <div className={styles.infoContent}>
+              <p className={styles.condition}>
+                {condition.charAt(0).toUpperCase() +
+                  condition.slice(1).toLowerCase()}
+              </p>
+              <h1>{title}</h1>
+              <p className={styles.price}>{amountFor}</p>
+              <button>Comprar</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles.descriptionContainer}>
-        {description && (
-          <React.Fragment>
-            <p className={styles.title}>Descripción del producto</p>
-            <p className={styles.text}>{descriptionHtml}</p>
-          </React.Fragment>
-        )}
-      </div>
-    </section>
+        <div className={styles.descriptionContainer}>
+          {description && (
+            <React.Fragment>
+              <p className={styles.title}>Descripción del producto</p>
+              <p className={styles.text}>{descriptionHtml}</p>
+            </React.Fragment>
+          )}
+        </div>
+      </section>
+    </Fragment>
   );
 }

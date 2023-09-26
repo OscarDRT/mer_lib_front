@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Linkedin } from "../icons/logo";
 import { SearchIcon } from "../icons/search";
 import styles from "./header.module.scss";
+import { setCookie } from "cookies-next";
 
 export const Header = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ export const Header = () => {
     const inputValue = event.currentTarget.search.value.trim();
 
     if (inputValue) {
+      setCookie("search", `${inputValue}`);
       router.push(`/items?search=${inputValue}`);
     }
   };
