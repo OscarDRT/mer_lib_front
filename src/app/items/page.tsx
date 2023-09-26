@@ -12,8 +12,6 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log({ params, searchParams });
-
   return {
     title: `${searchParams?.search} | MerLib 📦`,
     description: `Envíos Gratis en el día ✓ Compre ${searchParams?.search} en cuotas sin interés! Conozca nuestras increíbles ofertas y promociones en millones de productos.`,

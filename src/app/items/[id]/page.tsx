@@ -4,20 +4,47 @@ import Image from "next/image";
 import React from "react";
 import styles from "./id.module.scss";
 import { Metadata } from "next";
+import Link from "next/link";
 
 type Props = {
   params: { id: string };
   searchParams: { [key: string]: string | undefined };
 };
 
-const getItem = async (id: string) => {
-  return await fetch(`https://merliback.onrender.com/api/items/${id}`).then(
-    (res) => res.json() as Promise<ItemResult>
-  );
+const getItem = async (id: string): Promise<ItemResult | null> => {
+  try {
+    const res = await fetch(`https://merliback.onrender.com/api/items/${id}`);
+
+    if (!res.ok) {
+      console.error(`Error fetching item ${id}: ${res.statusText}`);
+      return null;
+    }
+
+    const contentType = res.headers.get("content-type");
+
+    if (!contentType || !contentType.includes("application/json")) {
+      console.error(`Expected JSON but received ${contentType}`);
+      return null;
+    }
+
+    return res.json() as Promise<ItemResult>;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { item } = await getItem(params.id);
+  const data = await getItem(params.id);
+
+  if (!data) {
+    return {
+      title: "Producto no encontrado",
+      description: "El producto que buscas no está disponible.",
+    };
+  }
+
+  const { item } = data;
 
   return {
     title: item.title,
@@ -26,8 +53,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ItemId({ params }: { params: { id: string } }) {
-  const { item } = await getItem(params.id);
+  const data = await getItem(params.id);
 
+  if (!data) {
+    return (
+      <section
+        style={{
+          padding: "16px",
+          maxWidth: "1250px",
+          margin: "auto",
+          textAlign: "center",
+        }}
+      >
+        <h2>Parece que esta producto no existe</h2>
+        <Link href={"/"}>Ir a la página principal</Link>
+      </section>
+    );
+  }
+
+  const { item } = data;
   const { picture, title, condition, price, description } = item ?? {};
   const { amount, currency } = price ?? {};
 
