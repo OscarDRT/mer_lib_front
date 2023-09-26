@@ -1,0 +1,61 @@
+@use "../../variables.module.scss" as variables;
+
+.searchBar {
+  background-color: variables.$color-primary;
+  padding: variables.$spacing-regular;
+
+  .navSearch {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    height: 40px;
+
+    .navLogo {
+      background-color: variables.$color-background;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: variables.$spacing-regular;
+
+      &:hover {
+        background-color: darken(variables.$color-background, 10%);
+      }
+    }
+
+    .navSearchInput {
+      flex-grow: 1;
+      padding: variables.$spacing-regular;
+      border: none;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      height: 40px;
+    }
+
+    .navSearchInput::placeholder {
+      color: variables.$color-light-grey;
+    }
+
+    .navSearchBtn {
+      background-color: variables.$color-background;
+      border: none;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: darken(variables.$color-background, 10%);
+      }
+    }
+  }
+}

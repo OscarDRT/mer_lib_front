@@ -1,0 +1,41 @@
+@use "../../variables.module.scss" as variables;
+
+.item {
+  display: flex;
+  padding: variables.$spacing-regular;
+  background-color: variables.$color-white;
+  position: relative;
+  border-bottom: 0.5px solid darken(variables.$color-background, 1%);
+
+  .imgContainer {
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: variables.$spacing-regular;
+    position: relative;
+    height: 180px;
+    width: 180px;
+  }
+
+  .image {
+    border-radius: 4px;
+  }
+
+  .price {
+    font-size: variables.$font-size-lg;
+    color: variables.$color-dark-grey;
+    font-weight: 500;
+    margin: variables.$spacing-regular 0;
+  }
+
+  .title {
+    font-size: variables.$font-size-md;
+    color: variables.$color-medium-grey;
+    font-weight: 300;
+  }
+
+  .city {
+    margin-left: auto;
+    font-size: variables.$font-size-xs;
+    color: variables.$color-light-grey;
+  }
+}
