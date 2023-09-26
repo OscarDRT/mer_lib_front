@@ -60,7 +60,6 @@ export default async function Items({
             <Link
               key={item.id}
               href={`items/${item.id}`}
-              target="blanck"
               style={{ textDecoration: "none" }}
             >
               <ItemCard item={item} />
