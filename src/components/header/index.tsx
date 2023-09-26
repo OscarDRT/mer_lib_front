@@ -27,8 +27,13 @@ export const Header = () => {
           href="https://www.linkedin.com/in/oscardrt/"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Read more about Oscar"
         >
-          <button type="button" className={styles.navLogo}>
+          <button
+            type="button"
+            className={styles.navLogo}
+            aria-label="LinkedIn Profile"
+          >
             <Linkedin />
           </button>
         </a>
@@ -38,7 +43,11 @@ export const Header = () => {
           name="search"
           type="text"
         />
-        <button type="submit" className={styles.navSearchBtn}>
+        <button
+          type="submit"
+          className={styles.navSearchBtn}
+          aria-label="Search"
+        >
           <SearchIcon />
         </button>
       </form>
